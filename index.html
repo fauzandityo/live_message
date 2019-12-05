@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Real-time Chat App</title>
+    </head>
+    <body>
+        <div>
+            <h3>MESSAGE SENT</h3>
+            <ul id="message"></ul>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+        <script>
+            // Define variables
+            const messages = document.querySelector(".messages");
+            const socket = io();
+
+            // Listening on 'chat_message' event
+            socket.on("chat_message", function(data) {
+                console.log("MESSAGE", data.message);
+                addMessage(data.message);
+            });
+
+            // Function to print the message
+            function addMessage(message) {
+                const messages = document.getElementById("message");
+                const li = document.createElement("li");
+                li.innerHTML = message;
+                messages.appendChild(li);
+            }
+        </script>
+    </body>
+</html>
